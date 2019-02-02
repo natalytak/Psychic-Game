@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Open+Sans" rel="stylesheet">
+    <title>Psy Game 3</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, rgba(182,141,76,1) 0%, rgba(182,141,76,1) 9%, rgba(243,226,199,1) 34%, rgba(233,212,179,1) 66%, rgba(193,158,103,1) 89%, rgba(193,158,103,1) 100%);
+        }
+        .container-fluid {
+            border: 10px ridge green;
+            border-radius: 20px;
+        }
+        #left, #right {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            border: 5px ridge #b20000;
+            border-radius: 20px;
+            font-size: 2em;
+        }
+        
+        #center-top{
+            font-family: 'Black Ops One', cursive;
+        }
+        #center-bottom{
+            color: green;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        img {
+            border: 3px ridge green;
+            border-radius: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <img class="center" src="psychic.png" atlt="psychic" style="height:auto width:50%">
+    <div class="container-fluid">
+        <div class="row">
+            <div id="center-top" class="col-lg-12">
+                <h1>The Psychic Game</h1>
+                <p>Guess what letter I'm thinking of <span id="computerChoice"></span></p>    
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="farLeft" class="col-lg-1"></div>
+            <div id="left" class="col-lg-4">
+                <p>Wins: <span id="wins"></span></p>
+            </div>
+            <div id="middle" class="col-lg-2"></div>
+            <div id="right" class="col-lg-4">
+                <p>Losses: <span id="losses"></span></p>
+            </div>
+            <div id="farRight" class="col-lg-1"></div>
+        </div>
+
+        <div class="row">
+            <div id="center-bottom" class="col-lg-12">
+                <p>Guesses: <span id="guesses"></span></p>
+                <p>Your guesses so far: <span id="guess-list"></span></p>
+            </div>
+        </div>
+    </div> 
+    <script>
+    
+var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var computerChoice;
+
+
+var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+        console.log("Computer Choice: " + computerChoice);
+
+var wins = 0;
+wins = document.getElementById('wins').innerHTML = (wins);
+var losses = 0;
+loses = document.getElementById('losses').innerHTML = (losses);
+var guesses = 9;
+guesses = document.getElementById('guesses').innerHTML = (guesses);
+var guessList = [];
+
+function reset() {
+  guesses = 9;
+  guessList = [];
+  computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+        console.log("Computer Choice: " + computerChoice);
+}
+
+   document.onkeyup = function (event) {
+        var userGuess = event.key;
+        guessList.push(userGuess);
+        
+        
+    if(userGuess === computerChoice) {
+            wins++;
+            reset();
+         
+    }else{
+        guesses--;
+    }
+   
+    if(guesses === 0){
+        losses++;
+        reset();    
+    }
+    
+    document.getElementById('wins').innerHTML = (wins);
+    document.getElementById('losses').innerHTML = (losses);
+    document.getElementById('guesses').innerHTML = (guesses);
+    document.getElementById('guess-list').innerHTML = (guessList.join(', '));
+}  
+
+
+</script>
+    </body>
+    </html>
